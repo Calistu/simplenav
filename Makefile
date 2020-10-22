@@ -3,12 +3,21 @@ RESULT=simplenav
 TARGET=$(RESULT).c
 INCLUDE=-I include/
 CC_FLAGS=`pkg-config --libs --cflags webkit2gtk-4.0` $(INCLUDE)
-OBJS=$(RESULT).o
+OBJS=init.o http.o home.o
 
-all: $(RESULT).o
+all: objects.o
 
-$(RESULT).o: $(TARGET)
-	$(CC) -o $(RESULT) $(TARGET) $(CC_FLAGS)
+init.o: src/init.c
+	$(CC) -c src/init.c $(CC_FLAGS)
+
+http.o: src/http.c
+	$(CC) -c src/http.c $(CC_FLAGS)
+
+home.o: src/home.c
+	$(CC) -c src/home.c $(CC_FLAGS)
+
+objects.o: $(OBJS)
+	$(CC) $(OBJS) $(TARGET) -o $(RESULT)  $(CC_FLAGS)
 
 clear:
-	rm  $(RESULT)
+	rm *.o $(RESULT)

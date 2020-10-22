@@ -2,6 +2,8 @@
 
 #define HOME "http://www.google.com"
 
-extern int nav_init();
+extern GtkWidget *webview;
 
 void home_redirect(GtkButton *botao, gpointer null);
+
+extern void resposta(WebKitDownload *download);
